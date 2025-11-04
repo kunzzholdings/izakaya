@@ -1,0 +1,159 @@
+/* MenuSelectionSection 专属样式 */
+
+/* 菜单选项容器 */
+.menu-container {
+  will-change: opacity, transform;
+}
+
+/* 菜单选项样式 */
+.menu-option {
+  position: relative;
+  overflow: hidden;
+  will-change: transform;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-option:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* 装饰边框 */
+.menu-border {
+  position: absolute;
+  pointer-events: none;
+  border: 2px solid var(--tokyo-gold);
+  transition: all 0.3s ease;
+}
+
+.menu-border-top-left {
+  top: 1.25rem;
+  left: 1.25rem;
+  width: 5rem;
+  height: 5rem;
+  border-right: none;
+  border-bottom: none;
+}
+
+.menu-border-bottom-right {
+  bottom: 1.25rem;
+  right: 1.25rem;
+  width: 5rem;
+  height: 5rem;
+  border-left: none;
+  border-top: none;
+}
+
+.menu-option:hover .menu-border {
+  border-color: var(--tokyo-gold-light);
+  transform: scale(1.1);
+}
+
+/* 菜单图片 */
+.menu-image {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.menu-option:hover .menu-image {
+  transform: scale(1.05);
+}
+
+/* 悬停效果覆盖层 */
+.menu-hover-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(200, 160, 104, 0.1) 0%,
+    rgba(200, 160, 104, 0.3) 50%,
+    rgba(200, 160, 104, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.menu-option:hover .menu-hover-overlay {
+  opacity: 1;
+}
+
+/* 背景图片 */
+.menu-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .menu-container {
+    gap: 2rem;
+  }
+  
+  .menu-option {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  
+  .menu-option {
+    height: 350px;
+  }
+  
+  .menu-border-top-left,
+  .menu-border-bottom-right {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-option {
+    height: 300px;
+  }
+  
+  .menu-border-top-left,
+  .menu-border-bottom-right {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .menu-border {
+    border-width: 3px;
+  }
+  
+  .menu-option:hover .menu-border {
+    border-color: var(--tokyo-gold-dark);
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .menu-option,
+  .menu-image,
+  .menu-hover-overlay {
+    transition: none;
+    will-change: auto;
+  }
+  
+  .menu-option:hover {
+    transform: none;
+  }
+  
+  .menu-option:hover .menu-image {
+    transform: none;
+  }
+}

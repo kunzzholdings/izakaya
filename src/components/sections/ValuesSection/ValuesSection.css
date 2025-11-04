@@ -1,0 +1,177 @@
+/* ValuesSection 专属样式 */
+
+/* 价值观卡片 */
+.values-card {
+  will-change: transform, opacity, width;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.values-card:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.values-card.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  z-index: 10;
+  width: 20rem; /* 桌面端展开时加宽，给内容留出空间 */
+}
+
+/* 卡片标题 */
+.values-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  will-change: opacity;
+  transition: all 0.3s ease;
+}
+
+/* 卡片内容 */
+.values-content {
+  will-change: max-width, opacity, transform;
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  border-top: 2px solid rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.values-content.active {
+  max-width: 32rem;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.values-content.inactive {
+  max-width: 0;
+  opacity: 0;
+  transform: translateY(0.5rem);
+}
+
+/* 垂直文字样式 */
+.values-vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* 背景图片 */
+.values-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+}
+
+/* 遮罩层 */
+.values-overlay {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+/* 容器动画 */
+.values-container {
+  will-change: transform;
+}
+
+.values-container.has-active .values-card:not(.active) {
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .values-card {
+    height: 20rem;
+    width: 5rem;
+  }
+  
+  .values-card.active {
+    width: 18rem;
+  }
+  
+  .values-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .values-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .values-card {
+    height: 4rem;
+    width: 100%;
+    max-width: 20rem;
+  }
+  
+  .values-card.active {
+    height: auto;
+    width: 100%;
+    max-width: 24rem;
+  }
+  
+  .values-title {
+    font-size: 2rem;
+  }
+  
+  .values-vertical-text {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+  }
+}
+
+@media (max-width: 480px) {
+  .values-card {
+    height: 3.5rem;
+    padding: 1.5rem;
+  }
+  
+  .values-card.active {
+    padding: 2rem;
+  }
+  
+  .values-title {
+    font-size: 1.5rem;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .values-card {
+    border-width: 2px;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  
+  .values-card.active {
+    background: rgba(255, 255, 255, 0.3);
+    border-width: 3px;
+  }
+  
+  .values-title {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+  }
+  
+  .values-content {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .values-card,
+  .values-content,
+  .values-title {
+    transition: none;
+    will-change: auto;
+  }
+  
+  .values-card:hover {
+    transform: none;
+  }
+  
+  .values-card.active {
+    transform: none;
+  }
+}

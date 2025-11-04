@@ -1,0 +1,86 @@
+/* MapSection 专属样式 */
+
+.map-section {
+  position: relative;
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 店铺卡片样式 */
+.store-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(139, 111, 71, 0.15);
+  transition: all 0.3s ease;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  width: 100%;
+  max-width: 600px;
+}
+
+.store-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(139, 111, 71, 0.25);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+.store-card-inner {
+  padding: 32px;
+}
+
+.map-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.map-wrapper iframe {
+  display: block;
+}
+
+.info-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  line-height: 1.6;
+}
+
+/* 响应式调整 */
+@media (max-width: 1024px) {
+  .store-card {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 768px) {
+  .map-section {
+    background-attachment: scroll;
+  }
+  
+  .store-card {
+    max-width: 100%;
+  }
+  
+  .store-card-inner {
+    padding: 24px;
+  }
+
+  .map-wrapper iframe {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .store-card-inner {
+    padding: 20px;
+  }
+}
+
+

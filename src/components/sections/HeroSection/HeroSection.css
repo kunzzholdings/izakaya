@@ -1,0 +1,118 @@
+/* HeroSection 专属样式 */
+
+/* 门动画效果 */
+.hero-door {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  will-change: transform;
+}
+
+.hero-door-1 {
+  background-image: url('/assets/images/Shoji.svg');
+}
+
+.hero-door-2 {
+  background-image: url('/assets/images/Shoji.svg');
+}
+
+.hero-door-3 {
+  background-image: url('/assets/images/Shoji.svg');
+}
+
+.hero-door-4 {
+  background-image: url('/assets/images/Shoji.svg');
+}
+
+/* 内容覆盖层动画 */
+.hero-content-overlay {
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+/* Logo动画 */
+.hero-logo {
+  will-change: width, height;
+  transition: all 0.3s ease;
+}
+
+/* 标题动画 */
+.hero-title {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  will-change: opacity;
+}
+
+.hero-subtitle {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+  will-change: opacity;
+}
+
+/* 背景图片动画 */
+.hero-background {
+  will-change: transform, opacity;
+  transform-origin: center center;
+}
+
+.hero-restaurant-image {
+  will-change: transform;
+  transform-origin: center center;
+}
+
+/* 鼠标视差效果 */
+.hero-parallax {
+  will-change: transform;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+    line-height: 1.2;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .hero-logo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-logo {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* 高对比度模式 */
+@media (prefers-contrast: high) {
+  .hero-title,
+  .hero-subtitle {
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 1);
+  }
+}
+
+/* 减少动画模式 */
+@media (prefers-reduced-motion: reduce) {
+  .hero-door,
+  .hero-content-overlay,
+  .hero-logo,
+  .hero-title,
+  .hero-subtitle,
+  .hero-background,
+  .hero-restaurant-image,
+  .hero-parallax {
+    will-change: auto;
+  }
+}

@@ -1,0 +1,229 @@
+/* 自定义布局和定位样式 */
+
+/* 精确定位工具类 */
+.translate-49 {
+  transform: translate(49%);
+}
+
+.translate-51 {
+  transform: translate(51%);
+}
+
+/* 像素级精确定位 */
+.position-pixel-perfect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(0, 0);
+}
+
+/* 多状态控制类 */
+.enter-state {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.active-state {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}
+
+.exit-state {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
+}
+
+/* 响应式定位 */
+@media (max-width: 768px) {
+  .mobile-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-position {
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    transform: translate(0, 0);
+  }
+}
+
+/* 复杂布局容器 */
+.complex-layout {
+  position: relative;
+  overflow: hidden;
+}
+
+.complex-layout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+/* 视差效果容器 */
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+
+/* 固定定位工具 */
+.fixed-fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+}
+
+/* 绝对居中 */
+.absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 绝对居中 - 水平 */
+.absolute-center-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 绝对居中 - 垂直 */
+.absolute-center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 网格布局工具 */
+.grid-overlay {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 1rem;
+}
+
+.grid-item {
+  grid-column: span 1;
+}
+
+/* 弹性布局工具 */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-start {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.flex-end {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* 层叠上下文 */
+.z-base {
+  z-index: 1;
+}
+
+.z-overlay {
+  z-index: 10;
+}
+
+.z-modal {
+  z-index: 100;
+}
+
+.z-tooltip {
+  z-index: 1000;
+}
+
+/* 溢出控制 */
+.overflow-hidden-x {
+  overflow-x: hidden;
+}
+
+.overflow-hidden-y {
+  overflow-y: hidden;
+}
+
+.overflow-scroll-x {
+  overflow-x: auto;
+}
+
+.overflow-scroll-y {
+  overflow-y: auto;
+}
+
+/* 尺寸工具 */
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* 间距工具 */
+.spacing-xs {
+  margin: 0.25rem;
+  padding: 0.25rem;
+}
+
+.spacing-sm {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+.spacing-md {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.spacing-lg {
+  margin: 1.5rem;
+  padding: 1.5rem;
+}
+
+.spacing-xl {
+  margin: 2rem;
+  padding: 2rem;
+}

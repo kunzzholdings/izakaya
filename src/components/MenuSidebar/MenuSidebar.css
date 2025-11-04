@@ -1,0 +1,76 @@
+.menu-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 12%;
+    height: 100vh;
+    background: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.sidebar-content {
+    padding: 40px 30px;
+}
+
+.back-link {
+    display: block;
+    color: #c8a068;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 40px;
+    transition: color 0.3s ease;
+}
+
+.back-link:hover {
+    color: #b8945f;
+}
+
+.menu-categories {
+    list-style: none;
+}
+
+.menu-categories li {
+    margin-bottom: 20px;
+}
+
+.menu-categories a {
+    display: block;
+    color: #666666;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 8px 0;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    padding-left: 15px;
+}
+
+.menu-categories a:hover {
+    color: #c8a068;
+    border-left-color: #c8a068;
+}
+
+.menu-categories a.active {
+    color: #c8a068;
+    font-weight: 600;
+    border-left-color: #c8a068;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .menu-sidebar {
+        width: 20%;
+    }
+    
+    .sidebar-content {
+        padding: 20px 15px;
+    }
+    
+    .menu-categories a {
+        font-size: 14px;
+    }
+}
+
