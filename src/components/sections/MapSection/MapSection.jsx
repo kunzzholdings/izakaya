@@ -81,7 +81,7 @@ const MapSection = () => {
                 </div>
 
                 {/* 店铺信息网格 */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 justify-items-center">
+                <div className="flex justify-center items-start">
                     {/* 总店 */}
                     <div ref={mainStoreRef} className="store-card">
                         <div className="store-card-inner">
