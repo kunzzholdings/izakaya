@@ -176,7 +176,7 @@ const HeroSection = () => {
                     <div className="hero-logo w-32 h-32 bg-tokyo-gold rounded-full mx-auto mb-8 flex-center shadow-2xl overflow-hidden relative" ref={logoRef}>
                         <Image src={IMAGES.tokyoLogo} alt="Tokyo Logo" fill className="object-cover" />
                     </div>
-                    <h1 className="hero-title text-6xl font-bold tracking-widest mb-5 text-shadow-lg" ref={titleRef}>TOKYO JAPANESE CUISINE</h1>
+                    <h1 className="hero-title text-6xl font-bold tracking-widest mb-5 text-shadow-lg" ref={titleRef}>TOKYO IZAKAYA CUISINE</h1>
                     <p className="hero-subtitle text-2xl tracking-wider mb-2 opacity-90" ref={subtitleRef1}>精致美食·品越服务</p>
                     <p className="hero-subtitle text-2xl tracking-wider mb-2 opacity-90" ref={subtitleRef2}>成就世界级日料品牌</p>
                 </div>

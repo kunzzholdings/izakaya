@@ -1,7 +1,7 @@
 // 图片路径配置
 const IMAGES = {
     // 主要图片
-    tokyoRestaurant: '/assets/images/tokyorestaurant.webp',
+    tokyoRestaurant: '/assets/images/tokyoRestaurant.webp',
     tokyoLogo: '/assets/images/tokyologo.png',
     shoji: '/assets/images/Shoji.svg',
     chef: '/assets/images/chef.webp',
