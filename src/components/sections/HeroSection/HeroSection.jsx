@@ -115,6 +115,14 @@ const HeroSection = () => {
             ease: 'power2.out'
         }, 0)
         
+        // Logo缩小
+        .to(logoRef.current, {
+            width: 150,
+            height: 150,
+            duration: 1.5,
+            ease: 'power2.out'
+        }, 0)
+        
         // 整体内容放大
         .to(contentOverlayRef.current, {
             scale: 1.15,
