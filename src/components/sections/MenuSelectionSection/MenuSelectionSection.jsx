@@ -3,34 +3,46 @@
 import React, { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { IMAGES } from '../../../config/images';
 import '@/styles/animations.css';
 import '@/styles/layout.css';
 import '@/styles/theme.css';
 import './MenuSelectionSection.css';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const MenuSelectionSection = () => {
     const menuContainerRef = useRef(null);
 
     useEffect(() => {
-        gsap.to(menuContainerRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 1.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.menu-selection-section',
-                start: 'top 60%',
-                toggleActions: 'play none none none'
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        gsap.to(menuContainerRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1.2,
+                            ease: 'power3.out'
+                        });
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        const section = document.querySelector('.menu-selection-section');
+        if (section) {
+            observer.observe(section);
+        }
+
+        return () => {
+            if (section) {
+                observer.unobserve(section);
             }
-        });
+        };
     }, []);
 
     return (
-        <div className="menu-selection-section relative min-h-screen menu-background flex-center overflow-hidden py-16 px-5 font-besley z-base" 
+        <div className="menu-selection-section snap-section relative menu-background flex-center overflow-hidden py-16 px-5 font-besley z-base" 
              style={{backgroundImage: `url('/assets/images/menubg.webp')`}} id="menu-selection">
             
             <div className="menu-container flex gap-16 max-w-6xl w-full opacity-0 translate-y-12 relative z-overlay" ref={menuContainerRef}>

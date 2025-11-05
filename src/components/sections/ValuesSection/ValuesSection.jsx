@@ -40,7 +40,7 @@ const ValuesSection = () => {
     };
 
     return (
-        <div className="relative min-h-screen values-background flex-center py-16 px-5 overflow-hidden z-base"
+        <div className="snap-section relative values-background flex-center py-16 px-5 overflow-hidden z-base"
              style={{backgroundImage: `url('/assets/images/vision.webp')`}}
              onClick={handleBackgroundClick}>
             {/* 遮罩层 */}

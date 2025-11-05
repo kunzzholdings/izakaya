@@ -2,13 +2,10 @@
 
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '@/styles/animations.css';
 import '@/styles/layout.css';
 import '@/styles/theme.css';
 import './MapSection.css';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const MapSection = () => {
     const titleRef = useRef(null);
@@ -16,58 +13,64 @@ const MapSection = () => {
     const branchStoreRef = useRef(null);
 
     useEffect(() => {
-        // 标题动画
+        // 设置初始状态
         gsap.set(titleRef.current, { opacity: 0, y: -30 });
-        gsap.to(titleRef.current, {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.map-section',
-                start: 'top 70%',
-                toggleActions: 'play none none none'
-            }
-        });
-
-        // 店铺卡片动画
         gsap.set([mainStoreRef.current, branchStoreRef.current], { 
             opacity: 0, 
             y: 50,
             scale: 0.95
         });
 
-        gsap.to(mainStoreRef.current, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.map-section',
-                start: 'top 60%',
-                toggleActions: 'play none none none'
-            }
-        });
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // 标题动画
+                        gsap.to(titleRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            duration: 1,
+                            ease: 'power3.out'
+                        });
 
-        gsap.to(branchStoreRef.current, {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            delay: 0.2,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.map-section',
-                start: 'top 60%',
-                toggleActions: 'play none none none'
+                        // 店铺卡片动画
+                        gsap.to(mainStoreRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            duration: 0.8,
+                            ease: 'power3.out'
+                        });
+
+                        gsap.to(branchStoreRef.current, {
+                            opacity: 1,
+                            y: 0,
+                            scale: 1,
+                            duration: 0.8,
+                            delay: 0.2,
+                            ease: 'power3.out'
+                        });
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        const section = document.querySelector('.map-section');
+        if (section) {
+            observer.observe(section);
+        }
+
+        return () => {
+            if (section) {
+                observer.unobserve(section);
             }
-        });
+        };
     }, []);
 
     return (
         <div 
-            className="map-section"
+            className="map-section snap-section"
             style={{ 
                 backgroundImage: 'url(/assets/images/address.webp)'
             }}

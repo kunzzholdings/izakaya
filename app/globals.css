@@ -23,6 +23,9 @@
 }
 
 body {
+  margin: 0;
+  padding: 0;
+  overflow: auto;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -30,6 +33,27 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+}
+
+/* 滚动容器 - 移除CSS scroll-snap，完全由JS控制 */
+.snap-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100vh;
+  
+  /* 隐藏滚动条 */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.snap-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.snap-section {
+  min-height: 100vh;
+  height: 100vh;
+  position: relative;
 }
 
 /* 自定义样式 */

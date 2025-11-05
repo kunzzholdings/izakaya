@@ -7,7 +7,7 @@ export const metadata = {
   title: 'Tokyo Izakaya Cuisine',
   description: 'Tokyo Izakaya Cuisine是一家专注于日本料理的餐厅，我们提供最正宗的日本料理， 等美味。',
   icons: {
-    icon: '/favicon.ico',
+    icon: 'favicon.ico',
   },
 }
 
