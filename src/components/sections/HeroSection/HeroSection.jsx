@@ -23,6 +23,16 @@ const HeroSection = () => {
     const backgroundRef = useRef(null);
     const restaurantImageRef = useRef(null);
 
+    // 追踪资源加载状态
+    const [imagesLoaded, setImagesLoaded] = useState({
+        restaurant: false,
+        logo: false,
+        door: false
+    });
+
+    // 检查所有图片是否加载完成
+    const allImagesLoaded = imagesLoaded.restaurant && imagesLoaded.logo && imagesLoaded.door;
+
     useEffect(() => {
         // 设置初始状态
         gsap.set(contentOverlayRef.current, {
@@ -40,9 +50,32 @@ const HeroSection = () => {
             opacity: 0
         });
 
-        // 创建时间线 - 门自动打开动画（延迟0.5秒后自动播放）
+        // 预加载门的SVG图片
+        // useEffect 只在客户端运行，但为了安全起见还是检查 window
+        if (typeof window !== 'undefined') {
+            const doorImage = new window.Image();
+            doorImage.src = '/assets/images/Shoji.svg';
+            doorImage.onload = () => {
+                setImagesLoaded(prev => ({ ...prev, door: true }));
+            };
+            doorImage.onerror = () => {
+                console.error('门图片加载失败');
+                // 即使失败也标记为已加载，避免动画一直等待
+                setImagesLoaded(prev => ({ ...prev, door: true }));
+            };
+        } else {
+            // 如果在服务器端，直接标记为已加载
+            setImagesLoaded(prev => ({ ...prev, door: true }));
+        }
+    }, []);
+
+    useEffect(() => {
+        // 只有当所有图片加载完成后才开始动画
+        if (!allImagesLoaded) return;
+
+        // 创建自动播放的开门动画时间线
         const tl = gsap.timeline({
-            delay: 0.5
+            delay: 0.3 // 资源加载后延迟0.3秒开始动画
         });
 
         // 门打开动画
@@ -50,70 +83,70 @@ const HeroSection = () => {
             x: '-100%',
             scale: 1.3,
             duration: 1.5,
-            ease: 'power3.out'
+            ease: 'power2.inOut'
         }, 0)
-        .to(door3Ref.current, {
-            x: '100%',
-            scale: 1.3,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0)
-        .to(door1Ref.current, {
-            scale: 1.3,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0)
-        .to(door4Ref.current, {
-            scale: 1.3,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0)
-        
-        // 背景内容显示并放大
-        .to(backgroundRef.current, {
-            opacity: 1,
-            scale: 1.4,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0)
-        .to(restaurantImageRef.current, {
-            scale: 1.3,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0)
-        
-        // Logo缩小
-        .to(logoRef.current, {
-            width: 120,
-            height: 120,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0)
-        
-        // 整体内容放大
-        .to(contentOverlayRef.current, {
-            scale: 1.15,
-            duration: 1.5,
-            ease: 'power3.out'
-        }, 0.2)
-        
-        // 标题和副标题同时渐显
-        .to([titleRef.current, subtitleRef1.current, subtitleRef2.current], {
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out'
-        }, 0.3);
+            .to(door3Ref.current, {
+                x: '100%',
+                scale: 1.3,
+                duration: 1.5,
+                ease: 'power2.inOut'
+            }, 0)
+            .to(door1Ref.current, {
+                scale: 1.3,
+                duration: 1.5,
+                ease: 'power2.inOut'
+            }, 0)
+            .to(door4Ref.current, {
+                scale: 1.3,
+                duration: 1.5,
+                ease: 'power2.inOut'
+            }, 0)
+
+            // 背景内容显示并放大
+            .to(backgroundRef.current, {
+                opacity: 1,
+                scale: 1.4,
+                duration: 1.5,
+                ease: 'power2.out'
+            }, 0)
+            .to(restaurantImageRef.current, {
+                scale: 1.3,
+                duration: 1.5,
+                ease: 'power2.out'
+            }, 0)
+
+            // Logo缩小
+            .to(logoRef.current, {
+                width: 120,
+                height: 120,
+                duration: 1.5,
+                ease: 'power2.out'
+            }, 0)
+
+            // 整体内容放大
+            .to(contentOverlayRef.current, {
+                scale: 1.15,
+                duration: 1.5,
+                ease: 'power2.out'
+            }, 0.2)
+
+            // 标题和副标题同时渐显
+            .to([titleRef.current, subtitleRef1.current, subtitleRef2.current], {
+                opacity: 1,
+                duration: 0.8,
+                ease: 'power2.out'
+            }, 0.3);
 
         // 鼠标视差效果
         const handleMouseMove = (e) => {
             const moveX = (e.clientX - window.innerWidth / 2) / 50;
             const moveY = (e.clientY - window.innerHeight / 2) / 50;
-            
+
             gsap.to(contentOverlayRef.current, {
                 x: moveX,
                 y: moveY,
                 duration: 0.5,
-                ease: 'power3.out'
+                ease: 'power2.out'
             });
         };
 
@@ -121,17 +154,18 @@ const HeroSection = () => {
 
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
+            tl.kill(); // 清理时间线
         };
-    }, []);
+    }, [allImagesLoaded]);
 
     return (
         <div className="snap-section relative overflow-hidden" ref={sceneRef}>
             {/* 背景内容 */}
             <div className="hero-background absolute top-0 left-0 w-full h-full flex-center opacity-50 scale-100" ref={backgroundRef}>
                 <div className="hero-restaurant-image w-full h-full brightness-60 scale-100" ref={restaurantImageRef}>
-                    <Image 
-                        src={IMAGES.tokyoRestaurant} 
-                        alt="Japanese Restaurant" 
+                    <Image
+                        src={IMAGES.tokyoRestaurant}
+                        alt="Japanese Restaurant"
                         fill
                         className="object-cover"
                         priority
